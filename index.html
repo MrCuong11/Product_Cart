@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Giỏ hàng sản phẩm</title>
+    <link rel="icon" href="./img/W3Schools_logo.svg.png" type="image/x-icon" />
+    <link rel="stylesheet" href="style.css">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+</head>
+
+<body>
+    <div class="card">
+        <div class="card__heart">
+            <i class='bx bxs-heart'></i>
+        </div>
+        <div class="card__cart">
+            <i class='bx bxs-cart-alt'></i>
+        </div>
+        <div class="card__img">
+            <img src="https://www.nodemy.vn/projects/html-css-js/product-card/Nike%20Zoom%20KD%2012.png" alt="">
+        </div>
+        <div class="card__title">
+            Nike Zoom KD 12
+        </div>
+        <div class="card__price">
+            $99
+        </div>
+        <div class="card__size">
+            <h3>Kích thước:</h3>
+            <span class="one">1</span>
+            <span class="two">2</span>
+            <span class="three">3</span>
+            <span class="four">4</span>
+        </div>
+        <div class="card__color">
+            <h3>Màu sắc:</h3>
+            <span class="color__green"></span>
+            <span class="color__red"></span>
+            <span class="color__black"></span>
+            <span class="color__pink"></span>
+        </div>
+        <div class="card__action">
+            <button>Mua ngay</button>
+            <button>Thêm vào giỏ hàng</button>
+        </div>
+    </div>
+    <audio class="audio">
+        <source src="./audio/likeFB.mp3" type="audio/mpeg">
+    </audio>
+    <audio class="audio1">
+        <source src="./audio/OFF_sound.mp3" type="audio/mpeg">
+    </audio>
+    <script>
+        const cardHeart = document.querySelector('.card__heart');
+        const cardCart = document.querySelector('.card__cart');
+        const audioElement = document.querySelector('.audio');
+        const audioElement1 = document.querySelector('.audio1');
+
+        //    click size
+        const sizeElement2 = document.querySelector('.two');
+        const sizeElement3 = document.querySelector('.three');
+        const sizeElement4 = document.querySelector('.four');
+        const imgElement = document.querySelector('.card__img img');
+        // click color
+        const colorGreen = document.querySelector('.color__green');
+        const colorRed = document.querySelector('.color__red');
+        const colorBlack = document.querySelector('.color__black');
+        const colorPink = document.querySelector('.color__pink');
+
+
+        var isColor = localStorage.getItem('isColor') === 'true';
+
+        function updateHeartColor() {
+            if (isColor) {
+                cardHeart.style.color = 'red';
+            } else {
+                cardHeart.style.color = 'white';
+            }
+        }
+        updateHeartColor();
+        // click heart button 
+        cardHeart.addEventListener('click', function () {
+            isColor = !isColor;
+            localStorage.setItem('isColor', isColor);
+            updateHeartColor();
+
+            audioElement.play();
+            cardHeart.style.transform = 'scale(0.9)';
+            cardHeart.style.transition = 'all 0.1s ease-in-out';
+            setTimeout(() => {
+                cardHeart.style.transform = 'scale(1)';
+            }, 100);
+        });
+
+        // Click cart button
+        cardCart.addEventListener('click', () => {
+            audioElement1.play();
+            cardCart.style.transform = 'scale(0.9)';
+            cardCart.style.transition = 'all 0.1s ease-in-out';
+            setTimeout(() => {
+                cardCart.style.transform = 'scale(1)';
+            }, 100);
+        })
+        // click size 2 button 
+        let isClickSize = false;
+        sizeElement2.addEventListener('click', () => {
+            if (isClickSize) {
+                imgElement.style.transform = 'scale(1)';
+                isClickSize = false;
+            }
+            else {
+                imgElement.style.transform = 'scale(1.02)';
+                isClickSize = true;
+            }
+        })
+        // click size 3 button 
+        sizeElement3.addEventListener('click', () => {
+            if (isClickSize) {
+                imgElement.style.transform = 'scale(1)';
+                isClickSize = false;
+            }
+            else {
+                imgElement.style.transform = 'scale(1.03)';
+                isClickSize = true;
+            }
+        })
+        // click size 4 button 
+        sizeElement4.addEventListener('click', () => {
+            if (isClickSize) {
+                imgElement.style.transform = 'scale(1)';
+                isClickSize = false;
+            }
+            else {
+                imgElement.style.transform = 'scale(1.04)';
+                isClickSize = true;
+            }
+        })
+
+        // click color green
+        colorGreen.addEventListener('click', () => {
+            imgElement.style.filter = 'hue-rotate(0)';
+        })
+        // click color red
+        colorRed.addEventListener('click', () => {
+            imgElement.style.filter = 'hue-rotate(250deg)';
+        })
+        // click color black
+        colorBlack.addEventListener('click', () => {
+            imgElement.style.filter = 'grayscale(100%)';
+        })
+        // click color pink
+        colorPink.addEventListener('click', () => {
+            imgElement.style.filter = 'invert(100%)';
+        })
+    </script>
+</body>
+
+</html>
